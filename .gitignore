@@ -1,0 +1,17 @@
+# Env and secrets – never commit
+.env
+.env.local
+.env.*.local
+.streamlit/secrets.toml
+
+# Dependencies and build
+node_modules/
+dist/
+build/
+.next/
+
+# OS and editor
+.DS_Store
+*.log
+.idea/
+.vscode/
