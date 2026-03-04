@@ -31,50 +31,33 @@ export const CURATED_ACTORS = [
   },
   // --- X (Twitter) ---
   {
-    actorId: "xtdata~twitter-x-scraper",
+    actorId: "apidojo~tweet-scraper",
     description:
-      "X (Twitter) scraper. Use for ANY Twitter/X request: recent posts from @username, user timeline, tweets from a handle, search by keyword/hashtag. Returns tweets, engagement, author. Prefer this over web-scraper for Twitter/X. Use startUrls (array of URL strings) and/or twitterHandles (array of handles without @), maxItems, sort.",
+      "X (Twitter) scraper. Use for ANY Twitter/X request: recent posts from @username, user timeline, tweets from a handle, search by keyword/hashtag. Returns tweets, engagement, author. Input via startUrls and/or handles. See Apify console: https://console.apify.com/actors/61RPP7dywgiy0JPD0/input",
     exampleInput: {
       startUrls: ["https://twitter.com/username"],
-      twitterHandles: ["username"],
+      handles: ["username"],
       maxItems: 50,
-      sort: "Latest",
     },
   },
   // --- Reddit ---
   {
-    actorId: "runtime~reddit-scraper",
+    actorId: "trudax~reddit-scraper-lite",
     description:
-      "Scrape Reddit: posts, comments, subreddits, user profiles. Search by keyword, subreddit name, or URLs. Returns titles, text, scores, comments.",
+      "Scrape Reddit: posts, comments, subreddits. Search by keyword, subreddit name, or URLs. Returns titles, text, scores, comments. See Apify console: https://console.apify.com/actors/oAuCIx3ItNrs2okjQ/input",
     exampleInput: {
       startUrls: [{ url: "https://www.reddit.com/r/subreddit/" }],
       maxItems: 100,
     },
   },
-  {
-    actorId: "cloud9_ai~reddit-scraper",
-    description:
-      "Scrape Reddit via RSS: posts and discussions by keyword, subreddit, or user. Lighter alternative for Reddit data.",
-    exampleInput: {
-      search: "keyword or subreddit",
-      maxItems: 50,
-    },
-  },
   // --- LinkedIn ---
   {
-    actorId: "anchor~linkedin-profile-enrichment",
+    actorId: "harvestapi~linkedin-post-search",
     description:
-      "Scrape LinkedIn: people and company profiles. Use for lead enrichment, job titles, company info, experience. Provide profile or company URLs.",
+      "Search LinkedIn posts by query. Use for finding posts, discussions, and content on LinkedIn. See Apify console: https://console.apify.com/actors/buIWk2uOUzTmcLsuB/information/latest/readme",
     exampleInput: {
-      profileUrls: ["https://www.linkedin.com/in/username/"],
-    },
-  },
-  {
-    actorId: "scrapier~linkedin-profile-scraper",
-    description:
-      "Scrape LinkedIn profiles: names, job titles, company, education, skills, experience. Use profile URLs.",
-    exampleInput: {
-      urls: ["https://www.linkedin.com/in/username/"],
+      search: "search query for posts",
+      maxItems: 50,
     },
   },
   // --- Amazon ---
