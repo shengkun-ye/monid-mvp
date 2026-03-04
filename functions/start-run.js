@@ -67,8 +67,9 @@ const CURATED_ACTORS = [
     description:
       "Search LinkedIn profiles by query or filters (e.g. job title, company, location). Use for lead lists and people search.",
     exampleInput: {
-      search: "product manager San Francisco",
-      maxItems: 50,
+      searchQuery: "Machine Learning Engineer",
+      profileScraperMode: "Full",
+      startPage: 1,
     },
   },
   {

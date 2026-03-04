@@ -211,6 +211,8 @@ def main() -> None:
         st.session_state.run_task_id = t.get("id")
         st.rerun()
 
+  st.markdown("### What data do you want your agent to bring to you?")
+
   with st.form("search_form", border=False):
     query = st.text_input("Search", placeholder="e.g. top 10 cafes in Boston", label_visibility="collapsed")
     with st.expander("Output schema (optional)"):
