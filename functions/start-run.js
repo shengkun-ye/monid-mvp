@@ -34,48 +34,31 @@ const CURATED_ACTORS = [
     },
   },
   {
-    actorId: "xtdata~twitter-x-scraper",
+    actorId: "apidojo~tweet-scraper",
     description:
-      "X (Twitter) scraper. Use for ANY Twitter/X request: recent posts from @username, user timeline, tweets from a handle, search by keyword/hashtag. Returns tweets, engagement, author. Prefer this over web-scraper for Twitter/X. Use startUrls (array of URL strings) and/or twitterHandles (array of handles without @), maxItems, sort.",
+      "X (Twitter) scraper. Use for ANY Twitter/X request: recent posts from @username, user timeline, tweets from a handle, search by keyword/hashtag. Returns tweets, engagement, author. Input via startUrls and/or handles. See Apify console: https://console.apify.com/actors/61RPP7dywgiy0JPD0/input",
     exampleInput: {
       startUrls: ["https://twitter.com/username"],
-      twitterHandles: ["username"],
+      handles: ["username"],
       maxItems: 50,
-      sort: "Latest",
     },
   },
   {
-    actorId: "runtime~reddit-scraper",
+    actorId: "trudax~reddit-scraper-lite",
     description:
-      "Scrape Reddit: posts, comments, subreddits, user profiles. Search by keyword, subreddit name, or URLs. Returns titles, text, scores, comments.",
+      "Scrape Reddit: posts, comments, subreddits. Search by keyword, subreddit name, or URLs. Returns titles, text, scores, comments. See Apify console: https://console.apify.com/actors/oAuCIx3ItNrs2okjQ/input",
     exampleInput: {
       startUrls: [{ url: "https://www.reddit.com/r/subreddit/" }],
       maxItems: 100,
     },
   },
   {
-    actorId: "cloud9_ai~reddit-scraper",
+    actorId: "harvestapi~linkedin-post-search",
     description:
-      "Scrape Reddit via RSS: posts and discussions by keyword, subreddit, or user. Lighter alternative for Reddit data.",
+      "Search LinkedIn posts by query. Use for finding posts, discussions, and content on LinkedIn. See Apify console: https://console.apify.com/actors/buIWk2uOUzTmcLsuB/information/latest/readme",
     exampleInput: {
-      search: "keyword or subreddit",
+      search: "search query for posts",
       maxItems: 50,
-    },
-  },
-  {
-    actorId: "anchor~linkedin-profile-enrichment",
-    description:
-      "Scrape LinkedIn: people and company profiles. Use for lead enrichment, job titles, company info, experience. Provide profile or company URLs.",
-    exampleInput: {
-      profileUrls: ["https://www.linkedin.com/in/username/"],
-    },
-  },
-  {
-    actorId: "scrapier~linkedin-profile-scraper",
-    description:
-      "Scrape LinkedIn profiles: names, job titles, company, education, skills, experience. Use profile URLs.",
-    exampleInput: {
-      urls: ["https://www.linkedin.com/in/username/"],
     },
   },
   {
@@ -380,7 +363,7 @@ export default async function (req) {
     ).join("\n");
 
     const prompt = `You are a planner. The user wants data. Choose ONE Apify Actor and produce the exact input for it.
-Rule: For Twitter/X (e.g. "posts from @user", "tweets from handle", "X timeline") always use xtdata~twitter-x-scraper. Use startUrls as array of URL strings (e.g. ["https://twitter.com/elonmusk"]) and/or twitterHandles as array of handles without @.
+Rule: For Twitter/X (e.g. "posts from @user", "tweets from handle", "X timeline") always use apidojo~tweet-scraper. Use startUrls as array of URL strings (e.g. ["https://twitter.com/elonmusk"]) and/or handles as array of handles without @.
 
 Available Actors (actorId and example input shape only):
 ${actorsList}
