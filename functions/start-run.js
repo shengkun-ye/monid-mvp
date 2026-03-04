@@ -52,12 +52,41 @@ const CURATED_ACTORS = [
       maxItems: 100,
     },
   },
+  // LinkedIn actors – see docs/apify-linkedin-actors.md for detailed notes.
   {
     actorId: "harvestapi~linkedin-post-search",
     description:
       "Search LinkedIn posts by query. Use for finding posts, discussions, and content on LinkedIn. See Apify console: https://console.apify.com/actors/buIWk2uOUzTmcLsuB/information/latest/readme",
     exampleInput: {
       search: "search query for posts",
+      maxItems: 50,
+    },
+  },
+  {
+    actorId: "harvestapi~linkedin-profile-search",
+    description:
+      "Search LinkedIn profiles by query or filters (e.g. job title, company, location). Use for lead lists and people search.",
+    exampleInput: {
+      search: "product manager San Francisco",
+      maxItems: 50,
+    },
+  },
+  {
+    actorId: "powerai~linkedin-job-search-scraper",
+    description:
+      "Scrape LinkedIn job listings by keywords, location, or other filters. Returns job titles, companies, locations, and links.",
+    exampleInput: {
+      keywords: "data scientist",
+      location: "United States",
+      maxItems: 50,
+    },
+  },
+  {
+    actorId: "powerai~linkedin-company-search-scraper",
+    description:
+      "Search LinkedIn companies by name or keywords. Use for company discovery and enrichment.",
+    exampleInput: {
+      search: "AI startups",
       maxItems: 50,
     },
   },
@@ -418,6 +447,33 @@ Produce a valid input object that matches this schema and fulfills the user requ
       }
     } catch (e) {
       console.error("Planning failed, using fallback:", e?.message);
+    }
+  }
+
+  // Ensure LinkedIn search actors always get at least one query/filter field.
+  if (
+    actorId === "harvestapi~linkedin-profile-search" ||
+    actorId === "harvestapi~linkedin-post-search" ||
+    actorId === "powerai~linkedin-job-search-scraper" ||
+    actorId === "powerai~linkedin-company-search-scraper"
+  ) {
+    const hasQueryLikeField =
+      actorInput &&
+      typeof actorInput === "object" &&
+      (actorInput.query ||
+        actorInput.search ||
+        actorInput.keyword ||
+        actorInput.keywords ||
+        (Array.isArray(actorInput.queries) && actorInput.queries.length > 0));
+    if (!hasQueryLikeField && userRequest) {
+      actorInput = {
+        ...(actorInput && typeof actorInput === "object" ? actorInput : {}),
+        query: userRequest,
+        search: userRequest,
+        keyword: userRequest,
+        keywords: userRequest,
+        queries: [userRequest],
+      };
     }
   }
 
